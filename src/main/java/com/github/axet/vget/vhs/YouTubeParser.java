@@ -1,10 +1,17 @@
 package com.github.axet.vget.vhs;
 
-import java.net.MalformedURLException;
-import java.net.URI;
-import java.net.URISyntaxException;
-import java.net.URL;
-import java.net.URLDecoder;
+import com.github.axet.vget.info.VGetParser;
+import com.github.axet.vget.info.VideoInfo;
+import com.github.axet.vget.info.VideoInfo.States;
+import com.github.axet.vget.info.VideoInfo.VideoQuality;
+import com.github.axet.wget.WGet;
+import com.github.axet.wget.info.ex.DownloadError;
+import org.apache.commons.lang3.StringEscapeUtils;
+import org.apache.commons.lang3.StringUtils;
+import org.apache.http.NameValuePair;
+import org.apache.http.client.utils.URLEncodedUtils;
+
+import java.net.*;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -12,18 +19,6 @@ import java.util.Map;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-
-import org.apache.commons.lang3.StringEscapeUtils;
-import org.apache.commons.lang3.StringUtils;
-import org.apache.http.NameValuePair;
-import org.apache.http.client.utils.URLEncodedUtils;
-
-import com.github.axet.vget.info.VGetParser;
-import com.github.axet.vget.info.VideoInfo;
-import com.github.axet.vget.info.VideoInfo.States;
-import com.github.axet.vget.info.VideoInfo.VideoQuality;
-import com.github.axet.wget.WGet;
-import com.github.axet.wget.info.ex.DownloadError;
 
 public class YouTubeParser extends VGetParser {
 
@@ -431,8 +426,6 @@ public class YouTubeParser extends VGetParser {
                     }
                 }
                 
-                System.err.println(urlString);
-
                 if (url != null && itag != null && sig != null) {
                     try {
                         url += "&signature=" + sig;
