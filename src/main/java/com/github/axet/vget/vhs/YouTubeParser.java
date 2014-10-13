@@ -10,6 +10,8 @@ import org.apache.commons.lang3.StringEscapeUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.http.NameValuePair;
 import org.apache.http.client.utils.URLEncodedUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.net.*;
 import java.util.ArrayList;
@@ -23,6 +25,8 @@ import java.util.regex.Pattern;
 public class YouTubeParser extends VGetParser {
 
     final static String UTF8 = "UTF-8";
+
+    private static final Logger logger = LoggerFactory.getLogger(YouTubeParser.class);
 
     public static class VideoUnavailablePlayer extends DownloadError {
         private static final long serialVersionUID = 10905065542230199L;
@@ -426,6 +430,8 @@ public class YouTubeParser extends VGetParser {
                     }
                 }
                 
+                logger.debug(urlString);
+
                 if (url != null && itag != null && sig != null) {
                     try {
                         url += "&signature=" + sig;
